@@ -31,10 +31,7 @@ colors = np.random.uniform(0, 255, size=(len(CLASSES), 3))
 frame_id = 0
 init_trackbar_vals = [42, 63, 14, 87]      # wT, hT, wB, hB
 
-
-output_file = ''
 cap = cv.VideoCapture(VIDEO_PATH)
-output_file = ''.join(os.path.basename(VIDEO_PATH).split('.')[:-1] + ['_Detection.mp4'])
 
 count = 0
 no_of_array_values = 10
@@ -44,24 +41,16 @@ my_vals = []
 initialize_trackbars(init_trackbar_vals)
 
 
-video_writer = cv.VideoWriter(
-    'output.avi',
-    cv.VideoWriter_fourcc(*'XVID'),
-    cap.get(cv.CAP_PROP_FPS),
-    (2 * FRAME_WIDTH, FRAME_HEIGHT)
-)
 start_time = time.time()
 
 while True:
     success, img = cap.read()
     if not success:
         print('[i] ==> Done processing!!!')
-        print('[i] ==> Output file is stored at', os.path.join(OUTPUT_PATH, output_file))
         cv.waitKey(1000)
         break
 
     img = cv.resize(img, (FRAME_WIDTH, FRAME_HEIGHT), None)
-    imb_warp_points = img.copy()
     img_final = img.copy()
     img_canny = img.copy()
 
@@ -69,7 +58,6 @@ while True:
     img_thres, img_canny, img_color = thresholding(img_undis)
     src = val_trackbars()
     img_warp = perspective_warp(img_thres, dst_size=(FRAME_WIDTH, FRAME_HEIGHT), src=src)
-    img_warp_points = draw_points(img_warp, src)
     img_sliding, curves, lanes, ploty = sliding_window(img_warp, draw_windows=True)
 
     try:
