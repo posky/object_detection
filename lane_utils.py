@@ -229,7 +229,7 @@ def sliding_window(img, nwindows=15, margin=50, minpix=1, draw_windows=True):
 
 def get_curve(img, leftx, rightx):
     ploty = np.linspace(0, img.shape[0] - 1, img.shape[0])
-    y_eval = np.max(ploty)
+    # y_eval = np.max(ploty)
     ym_per_pix = 1 / img.shape[0]   # meters per pixel in y dimension
     xm_per_pix = 0.1 / img.shape[0] # meters per pixel in x dimension
 
@@ -237,8 +237,8 @@ def get_curve(img, leftx, rightx):
     left_fit_cr = np.polyfit(ploty * ym_per_pix, leftx * xm_per_pix, 2)
     right_fit_cr = np.polyfit(ploty * ym_per_pix, rightx * xm_per_pix, 2)
     # Calculate the new radii of curvature
-    left_curverad = ((1 + (2 * left_fit_cr[0] * y_eval * ym_per_pix + left_fit_cr[1]) ** 2) ** 1.5) / np.absolute(2 * left_fit_cr[0])
-    right_curverad = ((1 + (2 * right_fit_cr[0] * y_eval * ym_per_pix + right_fit_cr[1]) ** 2) ** 1.5) / np.absolute(2 * right_fit_cr[0])
+    # left_curverad = ((1 + (2 * left_fit_cr[0] * y_eval * ym_per_pix + left_fit_cr[1]) ** 2) ** 1.5) / np.absolute(2 * left_fit_cr[0])
+    # right_curverad = ((1 + (2 * right_fit_cr[0] * y_eval * ym_per_pix + right_fit_cr[1]) ** 2) ** 1.5) / np.absolute(2 * right_fit_cr[0])
 
     car_pos = img.shape[1] / 2
     l_fit_x_int = left_fit_cr[0] * img.shape[0] ** 2 + left_fit_cr[1] * img.shape[0] + left_fit_cr[2]

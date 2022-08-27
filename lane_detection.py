@@ -21,6 +21,8 @@ FRAME_WIDTH = 640
 FRAME_HEIGHT = 480
 
 net = cv.dnn.readNet(WEIGHTS_PATH, CONFIG_PATH)
+net.setPreferableBackend(cv.dnn.DNN_BACKEND_CUDA)
+net.setPreferableTarget(cv.dnn.DNN_TARGET_CUDA)
 with open(CLASSES_PATH, 'r') as f:
     CLASSES = [line.strip() for line in f.readlines()]
 
