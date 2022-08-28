@@ -1,12 +1,9 @@
 import numpy as np
 import cv2 as cv
-import matplotlib.image as mpimg
 import pickle
 
-import timeit
 
-
-def nothing(x):
+def nothing(_):
     pass
 
 def initialize_trackbars(init_trackbar_vals):
@@ -308,3 +305,25 @@ def draw_lines(img, lane_curve):
     cv.line(img, (my_width // 2, my_height - 50), (my_width // 2, my_height), (0, 255, 255), 2)
 
     return img
+
+
+def perspective_warp_one_point(
+        img,
+        point,
+        dst_size=(1280, 720),
+        src=np.float32([(0.43, 0.65), (0.58, 0.65), (0.1, 1), (1, 1)]),
+        dst=np.float32([(0, 0), (1, 0), (0, 1), (1, 1)])):
+    img_size = np.float32([(img.shape[1], img.shape[0])])
+    src = src * img_size
+    # For destination points, I'm arbitrarily choosing some points to be
+    # a nice fit for displaying our warped result
+    # again, not exact, but close enough for our purposes
+    dst = dst * np.float32(dst_size)
+    # Given src and dst points, calculate the perspective transform matrix
+    M = cv.getPerspectiveTransform(src, dst)
+    # Warp the image using OpenCV WwarpPerspective()
+    point = np.array([point[0], point[1], 1]).transpose()
+    warped_point = np.matmul(M, point)
+    wx, wy = int(warped_point[0] / warped_point[2]), int(warped_point[1] / warped_point[2])
+
+    return (wx, wy)
