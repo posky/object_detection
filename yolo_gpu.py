@@ -17,9 +17,11 @@ def get_youtube(url):
 CUR_PATH = os.path.dirname(__file__)
 MODEL_PATH = os.path.join(CUR_PATH, 'models/yolov3.weights')
 CONFIG_PATH = os.path.join(CUR_PATH, 'models/yolov3.cfg')
-CLASSES_PATH = os.path.join(CUR_PATH, 'coco.names')
+# MODEL_PATH = os.path.join(CUR_PATH, 'models/yolov4.weights')
+# CONFIG_PATH = os.path.join(CUR_PATH, 'models/yolov4.cfg')
+CLASSES_PATH = os.path.join(CUR_PATH, 'models/coco.names')
 # TARGET = 'https://www.youtube.com/watch?v='
-TARGET = 'blackbox2.webm'
+TARGET = 'input/blackbox2.webm'
 INPUT_PATH = os.path.join(CUR_PATH, TARGET) \
     if urllib.parse.urlparse(TARGET).netloc == '' else get_youtube(TARGET)
 ASYNC_NUM = 0
