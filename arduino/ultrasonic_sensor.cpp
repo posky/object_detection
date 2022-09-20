@@ -1,6 +1,6 @@
 #include <Ultrasonic.h>
 
-Ultrasonic sensor(9, 8, 300000);    // (Trig, Echo, max distance us => 30000us ~~ 5m)
+Ultrasonic sensor(9, 8, 30000);    // (Trig, Echo, max distance us => 30000us ~~ 5m)
 
 int distance = 0;
 
