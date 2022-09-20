@@ -132,3 +132,5 @@ data
 models
 input
 yolo.ipynb
+.vscode/c_cpp_properties.json
+.vscode/settings.json
