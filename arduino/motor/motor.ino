@@ -13,7 +13,7 @@ void setup() {
 }
 
 void loop() {
-    control.Motor(150, 1);
+    control.Motor(150, 0);
     distance = sensor.Ranging(CM);
 
     delay(measurement_speed);
